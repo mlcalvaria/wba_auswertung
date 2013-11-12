@@ -1,0 +1,36 @@
+.footer{
+  position: relative;
+  bottom: 0;
+  left: 0;
+  background: #434343;
+  color: #ffffff;
+  width: 100%;
+  display: block;
+  min-height: 120px;
+  text-align: center;
+  padding-bottom: 1px ;
+  padding-top: 1px ;
+
+}
+
+.footer-element{
+  @include vendor(transition, color .25s);
+  color: #ffffff;
+  text-decoration: none;
+  vertical-align: middle;
+  padding: 3rem 5rem;
+  background: #66ffb9;
+  margin-top: 2.5%;
+
+  &:hover{
+    @include vendor(transition, all .25s);
+    font-weight: bold;
+    color: #ff4933;
+  }
+}
+
+.browsehappy{
+  margin-bottom: 2.5%;
+}
+
+

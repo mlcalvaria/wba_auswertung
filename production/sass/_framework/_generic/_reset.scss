@@ -1,0 +1,42 @@
+//Todo: better comment.
+*{
+
+  &,
+  &:before,
+  &:after{
+    @include vendor(box-sizing, border-box);
+  }
+
+}
+
+html{
+  font: 15.5px Helvetica, arial, freesans, clean, sans-serif;
+
+  overflow-y:scroll;
+  height:100%;
+}
+
+.body {
+  @include vendor(transition, margin-top .75s);
+  position: relative;
+  min-height: 100%;
+  background: #ffffff;
+  padding-top: 1px;
+
+  &.active{
+    @include vendor(transition, margin-top .75s);
+    margin-top: 175px;
+  }
+
+}
+
+a{
+  text-decoration: none;
+}
+
+h2{
+  margin: 0;
+}
+ul{
+  padding: 0;
+}

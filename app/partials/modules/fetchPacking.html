@@ -1,0 +1,28 @@
+<input type="text" maxlength="2" ng-model="position.packing2.shorthand">
+<i class="icon-question-sign" ng-click="togglePackingList()"></i>
+
+<div class="modPackingList" ng-show="visibility">
+
+    <span class="modPackingList__button--close icon-2x icon-remove" ng-click="togglePackingList()"></span>
+
+    <section class="modPackingList__cat">
+        <h2 class="modPackingList__cat__title">A - M</h2>
+		<span class="modPackingList__advice jsAdvice" id="advReturn" ng-click="addAdvice(treatment.description)" ng-repeat="item in packingProvider | limitTo: 28">
+        	<i class="modPackingList__advice__icon icon-{{treatment.icon}}"></i>
+           	{{item.shorthand}}<br>
+           	{{item.description}}
+   	  	</span>
+    </section>
+
+    <section class="modPackingList__cat">
+        <h2 class="modPackingList__cat__title">N - Z</h2>
+
+       <span class="modPackingList__advice jsAdvice" ng-click="addAdvice(treatment.description)" ng-repeat="item in packingProvider | limitTo: -28">
+	       <i class="modPackingList__advice__icon icon-{{treatment.icon}}"></i>
+	       {{item.shorthand}}<br>
+           	{{item.description}}
+       </span>
+    </section>
+   
+
+</div>

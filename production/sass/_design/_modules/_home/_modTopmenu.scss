@@ -1,0 +1,35 @@
+.m-sideMenu--top{
+
+  background: transparent;
+
+}
+
+.modTopmenu__section{
+  height: 100%;
+  width: 25%;
+  line-height: 175px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 120%;
+  float: left;
+  background: #d8e1da;
+  cursor: pointer;
+  @include vendor(transition, background .3s);
+
+  &:hover{
+    background: #fff8f9;
+  }
+
+  >p{
+    margin: 0;
+    padding: 0;
+  }
+
+  &:nth-child(2n+1){
+    background: #c5c2bd;
+
+    &:hover{
+      background: #fff8f9;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+// Menu-Container
+.modSidemenu{
+  position: fixed;
+  z-index: 9001;
+  width: 5%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #d1cbcf;
+}
+
+// Einzelne "Buttons"
+.modSidemenu__option{
+  height: 16.6666667%;
+  text-align: center;
+  width: 100%;
+  font: 150%;
+  display: block;
+  color: #534f51;
+  border-bottom: 2px solid #46638f;
+
+  &:hover{
+    color: #e2e858;
+  }
+
+}
+
+.modSidemenu__option--spacing{
+  display: inline-block;
+  padding-top: 75%;
+}
+
+.modSidemenu__option--spacingTT{
+  display: inline-block;
+  padding-top: 25%;
+}

@@ -1,0 +1,57 @@
+.modInformations{
+  position: relative;
+  left: 5%;
+  width: 45%;
+  float: left;
+  padding-bottom: 2.5%;
+
+  >.modInformations__title{
+    font-size: 1.3rem;
+    margin-left: 5px;
+    margin-bottom: 10px;
+  }
+  
+  >label{
+    margin-left: 5px;
+    display: block;
+    font-weight: 300;
+    margin-top: .25rem;
+    color: #858585;
+    font-size: .75rem;
+    font-family: "Noto Sans";
+  }
+  .modInformations__input{
+    display: block;
+    width: 66%;
+    margin: 5px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    outline: none;
+    background: transparent;
+
+    &:focus{
+      background: #ddd;
+    }
+  }
+
+  .modInformations__charge,.modInformations__value{
+    width: 15%;
+  }
+
+  .modInformations__freightPayer{
+    width: 25%;
+  }
+}
+
+.advAdvise__number{
+  color: #000;
+  vertical-align: middle;
+}
+
+.vis{
+  display: block;
+}
+
+.invis{
+  display: none;
+}

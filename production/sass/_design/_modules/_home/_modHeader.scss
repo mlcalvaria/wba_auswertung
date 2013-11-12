@@ -1,0 +1,45 @@
+@import "../../defaults";
+
+.body{
+  border-left: 30px solid #fff;
+}
+
+.modHeader{
+  border-top: 4px solid #534f51;
+
+  position: relative;
+  width: 95%;
+  left: 5%;
+  border-bottom: 5px solid $brand-color-yellow;
+  color: #000000;
+  background: #eaeaea;
+}
+
+.modHeader--help{
+  left: 0;
+  width: 100%;
+}
+
+.modHeader__search{
+  display: inline-block;
+  margin: 5px;
+  position: relative;
+  left: 5%;
+  >.modHeader__search__input{
+
+    background: #fbfdff;
+    border: none;
+    outline: none;
+    color: $brand-color-blue;
+    font-weight: bold;
+    padding: 10px 5px 10px 0;
+  }
+}
+
+.modHeader__title{
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 300;
+  margin: 10px;
+  margin-left: 25px;
+}

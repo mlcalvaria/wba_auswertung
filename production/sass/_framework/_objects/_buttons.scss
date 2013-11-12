@@ -1,0 +1,41 @@
+.button{
+
+  /**
+
+  1. Allow us to better style box model properties.
+  2. Make them appear slightly rounded. [Is there a need of button--hard, button--soft?]
+  3. A button should clickable
+  4. Move the button slightly down and make it appear pressed, as it is clicked
+*/
+
+  padding-top: 0;                                 /*[1]*/
+  padding-bottom: 0;                              /*[1]*/
+  line-height: 2;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 2px;                             /*[2]*/
+  display: inline-block;
+  cursor: pointer;                                /*[3]*/
+
+  &:active{
+    -webkit-transform: translateY(1px);           /*[4]*/
+    -moz-transform: translateY(1px);              /*[4]*/
+    -ms-transform: translateY(1px);               /*[4]*/
+    -o-transform: translateY(1px);                /*[4]*/
+    transform: translateY(1px);                   /*[4]*/
+    box-shadow: 1px 1px 2px #000000 inset;        /*[4]*/
+  }
+
+}
+
+// MODIFIERS
+//========================================
+
+.button--huge{
+  padding: 2em;
+}
+
+.button--squashed{
+  line-height: 1.5;
+  border-radius: 0;
+}

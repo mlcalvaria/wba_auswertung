@@ -1,0 +1,114 @@
+.modShipments{
+  position: relative;
+  width: 95%;
+  left: 5%;
+  clear: both;
+  padding-bottom: 1px;
+  padding-top: 10px;
+  margin-top: 10px;
+  border-top: 2px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #ddd;
+
+  >.modShipments__title{
+    font-size: 1.3rem;
+    margin-left: 5px;
+    margin-bottom: 10px;
+  }
+}
+
+.modShipments__title{
+  margin-bottom: 25px;
+  margin-left: 5px;
+}
+
+.modShipments__table{
+  width: 95% ;
+  margin: 0 auto;
+  border-collapse: collapse;
+  position: static;
+
+}
+
+.modShipments__table__heading{
+  text-align: left;
+  padding: 0 10px;
+  margin-right: 25px;
+  border-right: 2px solid #ddd;
+  border-bottom: 4px solid #a7a7a7;
+  font-weight: 300;
+  background: #ffffff;
+  &:last-child{
+
+    border-right: none;
+  }
+}
+
+.modShipments__table__row{
+
+  padding: .75rem 0;
+
+
+  &:hover{
+    background: #c7cfc8 !important;
+  }
+
+}
+
+.modShipments__table__field{
+  padding-left: 4px;
+  border-right: 2px solid #ddd;
+  border-bottom: 2px solid #dddddd;
+
+  input{
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+
+
+    &:focus{
+      background: #abada9;
+    }
+
+
+  }
+  &:last-child{
+    border: none;
+  }
+}
+
+.modShipments__table__field--remove{
+  border: none;
+}
+
+.modShipments__btnContainer{
+
+  height: 35px;
+  width: 35px;
+  border: 2px solid $brand-color-yellow;
+  text-align: center;
+  margin: 35px 15px 5px 2.5%;
+
+
+  >span{
+
+    line-height: 35px;
+    color: #5d8aff;
+    cursor: pointer;
+    @include vendor(transition, color .3s);
+
+    &:hover{
+      color: $brand-color-blue;
+    }
+  }
+}
+
+#count,#packingCount,#weight,#measure,#packing,#packing2{
+  width: 5%;
+}
+
+#deliveryNumber{
+  width: 10%;
+}

@@ -1,0 +1,152 @@
+.modAdvice{
+  position: relative;
+  left: 5%;
+  width: 45%;
+  float: left;
+  padding-top: 1px;
+  height: 200px;
+  padding-bottom: 2.5%;
+  position: relative;
+}
+
+.modAdvice__title{
+  margin: 0 5px;
+  font-size: 1.3rem;
+}
+
+.modAdvice__btnWrapper{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: inline-block;
+  height: 35px;
+  width: 35px;
+  border: 2px solid $brand-color-yellow;
+  text-align: center;
+  margin: 35px 15px 5px 2.5%;
+
+  >span{
+
+    line-height: 35px;
+    color: #5d8aff;
+    cursor: pointer;
+    @include vendor(transition, color .3s);
+
+    &:hover{
+      color: $brand-color-blue;
+    }
+  }
+}
+
+.modAdvice__activeAdvice{
+
+  margin: 5px 0 5px 15px ;
+  border: 1px solid #dddddd;
+  padding: 5px;
+  width: 80%;
+
+  &:hover{
+    cursor: pointer;
+    background: rgba(148, 43, 49, 0.49);
+
+    &:after{
+      content: 'Löschen';
+      position: absolute;
+      right: 200px;
+
+    }
+  }
+}
+
+.modAdvicelist,.testContainer{
+  position: fixed;
+  top: 5px;
+  left: 12.5%;
+  width: 75%;
+  max-height: 95%;
+  background: rgb(252, 255, 252);
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  overflow-y: auto;
+  z-index: 21;
+
+}
+
+.modAdvicelist__cat{
+  width: 32%;
+  display: inline-block;
+  vertical-align: top;
+  
+}
+
+.modAdvicelist__cat__title{
+  border-bottom: 4px solid $brand-color-blue;
+  width: 90%;
+}
+
+.modAdvicelist__advice{
+  display: block;
+  padding: .5rem ;
+
+  &:hover{
+    background: #000000;
+    color: #ffffff;
+    cursor: pointer;
+  }
+}
+
+.modAdvicelist__advice__icon{
+  margin-right: 5px;
+}
+
+.modAdvice__adviceBox__input{
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: baseline;
+}
+
+.modAdvice__adviceBox__delete{
+  font-size: 12px;
+  color: #f7141b;
+  position: absolute;
+  right: 5px;
+
+  &.is-hidden{
+    display: none;
+  }
+}
+
+.modAdvice__adviceBox__edit{
+  font-size: 12px;
+  color: #f7141b;
+  position: absolute;
+  right: 100px;
+
+  &.is-hidden{
+    display: none;
+  }
+}
+
+.modAdvicelist__button--close{
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &:hover{
+    cursor: pointer;
+    color: $brand-color-yellow;
+  }
+}
+
+.backdrop{
+
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.58);
+}

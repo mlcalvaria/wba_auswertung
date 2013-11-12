@@ -1,0 +1,163 @@
+/**
+
+  1. Well, we need a standard
+  2. [hover] Smooth effect
+  3. [hover] lighten up the background
+  4. [hover , --border] lighten up the box-shadow
+
+
+/*------------------------------------*\
+    modifiers
+\*------------------------------------
+
+  --$color[blue,red]  : will change the color of the button
+  --border            : will wrap the button in a border with padding
+
+*/
+
+.button{
+
+  background: $spw-green;                                             /*[1]*/
+  font-family: $fontfamily-button;
+  padding: .5rem;
+
+  &:hover{
+    -webkit-transition: all .25s;                                     /*[2]*/
+    -moz-transition:    all .25s;                                     /*[2]*/
+    -ms-transition:     all .25s;                                     /*[2]*/
+    -o-transition:      all .25s;                                     /*[2]*/
+    transition:         all .25s;                                     /*[2]*/
+
+    background: lighten($spw-green, 15%);                             /*[3]*/
+
+    -webkit-box-shadow:  0 0 2px 2px lighten($spw-green, 15%);        /*[4]*/
+    -moz-box-shadow:     0 0 2px 2px lighten($spw-green, 15%);        /*[4]*/
+    box-shadow:          0 0 2px 2px lighten($spw-green, 15%);        /*[4]*/
+  }
+
+  &.button--border{
+    border: 4px solid #ffffff;
+
+    -webkit-box-shadow:   0 0 2px 2px $spw-green;
+    -moz-box-shadow:      0 0 2px 2px $spw-green;
+    box-shadow:           0 0 2px 2px $spw-green;
+  }
+}
+
+.button--blue{
+  background: $spw-blue;
+
+  &:hover{
+    -webkit-transition: all .25s;
+    -moz-transition:    all .25s;
+    -ms-transition:     all .25s;
+    -o-transition:      all .25s;
+    transition:         all .25s;
+
+    background: lighten($spw-blue, 15%);
+
+    -webkit-box-shadow:   0 0 2px 2px lighten($spw-blue, 15%);
+    -moz-box-shadow:      0 0 2px 2px lighten($spw-blue, 15%);
+    box-shadow:           0 0 2px 2px lighten($spw-blue, 15%);
+  }
+
+  &.button--border{
+    border: 4px solid #ffffff;
+
+    -webkit-box-shadow:   0 0 2px 2px $spw-blue;
+    -moz-box-shadow:      0 0 2px 2px $spw-blue;
+    box-shadow:           0 0 2px 2px $spw-blue;
+  }
+}
+
+
+.button--red{
+  background: $spw-red;
+
+  &:hover{
+    -webkit-transition: all .25s;
+    -moz-transition:    all .25s;
+    -ms-transition:     all .25s;
+    -o-transition:      all .25s;
+    transition:         all .25s;
+
+    background: lighten($spw-red, 15%);
+
+    -webkit-box-shadow:   0 0 2px 2px lighten($spw-red, 15%);
+    -moz-box-shadow:      0 0 2px 2px lighten($spw-red, 15%);
+    box-shadow:           0 0 2px 2px lighten($spw-red, 15%);
+
+  }
+
+  &.button--border{
+    border: 4px solid #ffffff;
+
+    -webkit-box-shadow:   0 0 2px 2px $spw-red;
+    -moz-box-shadow:      0 0 2px 2px $spw-red;
+    box-shadow:           0 0 2px 2px $spw-red;
+  }
+}
+
+.button--black{
+  background: #000000;
+  color: #ffffff;
+
+  &:hover{
+    -webkit-transition: all .25s;
+    -moz-transition:    all .25s;
+    -ms-transition:     all .25s;
+    -o-transition:      all .25s;
+    transition:         all .25s;
+
+    background: #f7fcfe;
+    color: #000000;
+
+    -webkit-box-shadow:   0 0 2px 2px lighten(#000000, 15%);
+    -moz-box-shadow:      0 0 2px 2px lighten(#000000, 15%);
+    box-shadow:           0 0 2px 2px lighten(#000000, 15%);
+
+  }
+
+  &.button--border{
+    border: 4px solid #ffffff;
+
+    -webkit-box-shadow:   0 0 2px 2px #000000;
+    -moz-box-shadow:      0 0 2px 2px #000000;
+    box-shadow:           0 0 2px 2px #000000;
+  }
+}
+
+
+.button--invertedBlack{
+  background: #f7fcfe;
+  color: #000000;
+
+  -webkit-box-shadow:   inset 0 0 4px 1px #000000;
+  -moz-box-shadow:      0 0 2px 2px #000000;
+  box-shadow:           inset 0 0 4px 1px #000000;
+
+  &:hover{
+    -webkit-transition: all .25s;
+    -moz-transition:    all .25s;
+    -ms-transition:     all .25s;
+    -o-transition:      all .25s;
+    transition:         all .25s;
+
+    background: #000000;
+    color: #ffffff;
+
+    -webkit-box-shadow:   0 0 2px 2px #f7fcfe;
+    -moz-box-shadow:      0 0 2px 2px #f7fcfe;
+    box-shadow:           0 0 2px 2px #f7fcfe;
+
+  }
+
+  &.button--border{
+    border: 4px solid #000000;
+
+    -webkit-box-shadow:   0 0 2px 2px #f7fcfe;
+    -moz-box-shadow:      0 0 2px 2px #f7fcfe;
+    box-shadow:           0 0 2px 2px #f7fcfe;
+  }
+}
+
