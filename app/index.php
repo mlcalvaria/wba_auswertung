@@ -7,6 +7,7 @@
         <meta name="description" content="WBA Auswertung">
         <meta name="viewport" content="width=device-width">
 
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="stylesheets/style.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>

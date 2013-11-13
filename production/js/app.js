@@ -1,5 +1,6 @@
 
-//@prepros-append controllers/VaCtrl.js
+//@prepros-append filters/personData.js
+//@prepros-append controllers/WbaCtrl.js
 //@prepros-append services/clients.js
 
 var wba = angular.module('wba', ['ngRoute']);
@@ -12,7 +13,7 @@ var wba = angular.module('wba', ['ngRoute']);
 
 wba.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
-        when('/', {templateUrl: 'partials/views/home.php',   controller: 'VaCtrl',resolve: {
+        when('/', {templateUrl: 'partials/views/home.php',   controller: 'WbaCtrl',resolve: {
 
             data: function($q,clients){
                 var deffered = $q.defer();
