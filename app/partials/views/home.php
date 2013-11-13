@@ -17,8 +17,8 @@
             <th>Nachname</th>
             <th>Betreuer</th>
             <th>Partner</th>
-            <th>Kinder</th>
-            <th>Teilnahme</th>
+            <th class="shortrow">Kinder</th>
+            <th class="shortrow">Teilnahme</th>
             <th>Firma</th>
         </tr>
     </thead>
@@ -28,8 +28,8 @@
             <td><input type="text" ng-model="person.Nachname" ng-change="updatePerson(person)"></td>
             <td><input type="text" ng-model="person.Betreuer" ng-change="updatePerson(person)"></td>
             <td><input type="text" ng-model="person.Partner" ng-change="updatePerson(person)"></td>
-            <td><input type="text" ng-model="person.Kinder" ng-change="updatePerson(person)"></td>
-            <td><input type="text" ng-model="person.Teilnahme" ng-change="updatePerson(person)"></td>
+            <td><input class="shortrow" type="text" ng-model="person.Kinder" ng-change="updatePerson(person)"></td>
+            <td><input class="shortrow" type="text" ng-model="person.Teilnahme" ng-change="updatePerson(person)"></td>
             <td><input type="text" ng-model="person.Firma" ng-change="updatePerson(person)"></td>
         </tr>
     </tbody>
