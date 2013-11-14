@@ -29,11 +29,6 @@ wba.controller('WbaCtrl',function($scope,$http,clients,data){
     $scope.denials      = denialCounter;
     $scope.pending      = pendingCounter;
 
-    $scope.searchFilter = function (obj) {
-        var re = new RegExp($scope.search, 'i');
-        return !$scope.search || re.test(obj.Vorname) || re.test(obj.Nachname) || re.test(obj.Firma);
-    };
-
     $scope.updatePerson = function(person){
         clients.update(person);
 

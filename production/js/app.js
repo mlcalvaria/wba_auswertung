@@ -1,7 +1,8 @@
-
+//@prepros-append directives/resultTable.js
 //@prepros-append filters/personData.js
 //@prepros-append controllers/WbaCtrl.js
 //@prepros-append services/clients.js
+
 
 var wba = angular.module('wba', ['ngRoute']);
 

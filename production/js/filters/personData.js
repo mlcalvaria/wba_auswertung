@@ -1,8 +1,16 @@
 wba.filter('persondata',function(){
-    return function(obj,scope){
+    return function(obj,val){
 
-        console.dir(scope.search);
-        var re = new RegExp(scope.search, 'i');
-        return !scope.search || re.test(obj.Vorname) || re.test(obj.Nachname) || re.test(obj.Firma);
+        var filtered = [];
+
+        angular.forEach(obj, function(item) {
+            var re = new RegExp(val, 'i');
+            if(!val || re.test(item.Vorname) || re.test(item.Nachname) || re.test(item.Firma)){
+
+                filtered.push(item) ;
+            }
+
+        });
+        return filtered;
     };
 });

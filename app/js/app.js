@@ -1,7 +1,8 @@
-
+//@prepros-append directives/resultTable.js
 //@prepros-append filters/personData.js
 //@prepros-append controllers/WbaCtrl.js
 //@prepros-append services/clients.js
+
 
 var wba = angular.module('wba', ['ngRoute']);
 
@@ -30,12 +31,29 @@ wba.config(['$routeProvider', function($routeProvider) {
 
 
 
+wba.directive('rt',function(){
+    return{
+        restrict: 'E',
+        templateUrl: "partials/modules/resultTable.html",
+        link: function(scope,element,attrs){
+            console.log("fired");
+        }
+    }
+});
 wba.filter('persondata',function(){
-    return function(obj,scope){
+    return function(obj,val){
 
-        console.dir(scope.search);
-        var re = new RegExp(scope.search, 'i');
-        return !scope.search || re.test(obj.Vorname) || re.test(obj.Nachname) || re.test(obj.Firma);
+        var filtered = [];
+
+        angular.forEach(obj, function(item) {
+            var re = new RegExp(val, 'i');
+            if(!val || re.test(item.Vorname) || re.test(item.Nachname) || re.test(item.Firma)){
+
+                filtered.push(item) ;
+            }
+
+        });
+        return filtered;
     };
 });
 wba.controller('WbaCtrl',function($scope,$http,clients,data){
@@ -68,11 +86,6 @@ wba.controller('WbaCtrl',function($scope,$http,clients,data){
     $scope.participants = participantCounter;
     $scope.denials      = denialCounter;
     $scope.pending      = pendingCounter;
-
-    $scope.searchFilter = function (obj) {
-        var re = new RegExp($scope.search, 'i');
-        return !$scope.search || re.test(obj.Vorname) || re.test(obj.Nachname) || re.test(obj.Firma);
-    };
 
     $scope.updatePerson = function(person){
         clients.update(person);

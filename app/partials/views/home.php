@@ -10,29 +10,6 @@
     <p class="infopanel">Personen insgesamt (inkl. Partner & Kinder): {{allPersons}}</p>
 </div>
 
-<table class="table table-striped" ng-show="search.length > 1">
-    <thead>
-        <tr>
-            <th>Vorname</th>
-            <th>Nachname</th>
-            <th>Betreuer</th>
-            <th>Partner</th>
-            <th class="shortrow">Kinder</th>
-            <th class="shortrow">Teilnahme</th>
-            <th>Firma</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="person in clients | filter: searchFilter">
-            <td><input type="text" ng-model="person.Vorname" ng-change="updatePerson(person)"></td>
-            <td><input type="text" ng-model="person.Nachname" ng-change="updatePerson(person)"></td>
-            <td><input type="text" ng-model="person.Betreuer" ng-change="updatePerson(person)"></td>
-            <td><input type="text" ng-model="person.Partner" ng-change="updatePerson(person)"></td>
-            <td><input class="shortrow" type="text" ng-model="person.Kinder" ng-change="updatePerson(person)"></td>
-            <td><input class="shortrow" type="text" ng-model="person.Teilnahme" ng-change="updatePerson(person)"></td>
-            <td><input type="text" ng-model="person.Firma" ng-change="updatePerson(person)"></td>
-        </tr>
-    </tbody>
-</table>
+<rt></rt>
 
 <p class="h1 muted lead text-center no-data-panel" ng-hide="search.length > 1">Keine Daten geladen</p>
