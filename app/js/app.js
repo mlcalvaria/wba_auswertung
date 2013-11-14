@@ -3,7 +3,6 @@
 //@prepros-append controllers/WbaCtrl.js
 //@prepros-append services/clients.js
 
-
 var wba = angular.module('wba', ['ngRoute']);
 
 /*
@@ -22,6 +21,10 @@ wba.config(['$routeProvider', function($routeProvider) {
                 clients.getData().then(function(promise){
                     deffered.resolve(promise);
                 });
+
+                deffered.promise.then(function(promise){
+                   clients.init(promise.data);
+                });
                 return deffered.promise;
             }
 
@@ -36,7 +39,7 @@ wba.directive('rt',function(){
         restrict: 'E',
         templateUrl: "partials/modules/resultTable.html",
         link: function(scope,element,attrs){
-            console.log("fired");
+
         }
     }
 });
@@ -56,46 +59,30 @@ wba.filter('persondata',function(){
         return filtered;
     };
 });
-wba.controller('WbaCtrl',function($scope,$http,clients,data){
+wba.controller('WbaCtrl',function($scope,$http,clients){
 
-    var participantCounter  = 0,
-        denialCounter       = 0,
-        partnerCounter      = 0,
-        childrenCounter     = 0,
-        pendingCounter      = 0,
-        allPersons          = 0;
-
-    for (var i = 0;i < data.data.length;i++){
-
-        var kinder = parseInt(data.data[i].Kinder);
-
-        if (data.data[i].Teilnahme == 0){denialCounter++;}
-        if (data.data[i].Teilnahme == 1){participantCounter++;}
-        if (data.data[i].Teilnahme == 2){pendingCounter++;}
-        if (data.data[i].Partner  != ""){partnerCounter++;}
-        if (kinder != 0){childrenCounter = childrenCounter + kinder}
-
-        kinder = 0;
-    }
-
-    $scope.allPersons = participantCounter + childrenCounter + partnerCounter;
-
-    $scope.search = '';
-
-    $scope.clients      = data.data;
-    $scope.participants = participantCounter;
-    $scope.denials      = denialCounter;
-    $scope.pending      = pendingCounter;
+    $scope.search       = '';
+    $scope.allPersons   = clients.allPersons;
+    $scope.clients      = clients.data;
+    $scope.participants = clients.participants;
+    $scope.denials      = clients.denials;
+    $scope.pending      = clients.pendings;
 
     $scope.updatePerson = function(person){
         clients.update(person);
-
     }
 
 });
 wba.factory('clients',function($http){
 
   return{
+
+      data: [],
+
+      participants: 0,
+      denials: 0,
+      pendings: 0,
+      totalPersonCount: 0,
 
       getData: function(){
           return $http.post('sys/core/fetchData.php');
@@ -113,6 +100,22 @@ wba.factory('clients',function($http){
               'partner':        person.Partner,
               'children':       person.Kinder
           });
+      },
+
+      init: function(data){
+
+          this.data = data;
+
+          for (var i = 0;i < this.data.length;i++){
+
+              if (this.data[i].Teilnahme == 0){this.denials++;}
+              if (this.data[i].Teilnahme == 1){this.participants++;}
+              if (this.data[i].Teilnahme == 2){this.pendings++;}
+              if (this.data[i].Partner  != ""){this.totalPersonCount += 1}
+
+              this.totalPersonCount += parseInt(this.data[i].Kinder);
+          }
+
       }
 
   }

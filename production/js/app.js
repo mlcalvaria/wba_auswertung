@@ -3,7 +3,6 @@
 //@prepros-append controllers/WbaCtrl.js
 //@prepros-append services/clients.js
 
-
 var wba = angular.module('wba', ['ngRoute']);
 
 /*
@@ -21,6 +20,10 @@ wba.config(['$routeProvider', function($routeProvider) {
 
                 clients.getData().then(function(promise){
                     deffered.resolve(promise);
+                });
+
+                deffered.promise.then(function(promise){
+                   clients.init(promise.data);
                 });
                 return deffered.promise;
             }

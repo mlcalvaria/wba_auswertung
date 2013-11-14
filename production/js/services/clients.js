@@ -2,6 +2,13 @@ wba.factory('clients',function($http){
 
   return{
 
+      data: [],
+
+      participants: 0,
+      denials: 0,
+      pendings: 0,
+      totalPersonCount: 0,
+
       getData: function(){
           return $http.post('sys/core/fetchData.php');
       },
@@ -18,6 +25,22 @@ wba.factory('clients',function($http){
               'partner':        person.Partner,
               'children':       person.Kinder
           });
+      },
+
+      init: function(data){
+
+          this.data = data;
+
+          for (var i = 0;i < this.data.length;i++){
+
+              if (this.data[i].Teilnahme == 0){this.denials++;}
+              if (this.data[i].Teilnahme == 1){this.participants++;}
+              if (this.data[i].Teilnahme == 2){this.pendings++;}
+              if (this.data[i].Partner  != ""){this.totalPersonCount += 1}
+
+              this.totalPersonCount += parseInt(this.data[i].Kinder);
+          }
+
       }
 
   }
