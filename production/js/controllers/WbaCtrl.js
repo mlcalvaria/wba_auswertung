@@ -1,7 +1,7 @@
 wba.controller('WbaCtrl',function($scope,$http,clients){
 
     $scope.search       = '';
-    $scope.allPersons   = clients.allPersons;
+    $scope.allPersons   = clients.totalPersonCount;
     $scope.clients      = clients.data;
     $scope.participants = clients.participants;
     $scope.denials      = clients.denials;

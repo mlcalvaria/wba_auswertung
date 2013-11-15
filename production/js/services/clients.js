@@ -30,17 +30,20 @@ wba.factory('clients',function($http){
       init: function(data){
 
           this.data = data;
-
+var k = 0;
           for (var i = 0;i < this.data.length;i++){
 
               if (this.data[i].Teilnahme == 0){this.denials++;}
-              if (this.data[i].Teilnahme == 1){this.participants++;}
+              if (this.data[i].Teilnahme == 1){this.participants++;this.totalPersonCount += 1;}
               if (this.data[i].Teilnahme == 2){this.pendings++;}
-              if (this.data[i].Partner  != ""){this.totalPersonCount += 1}
+              if (this.data[i].Partner  != ""){this.totalPersonCount += 1;}
 
-              this.totalPersonCount += parseInt(this.data[i].Kinder);
+
+              if(this.data[i].Kinder != ""){
+
+                  this.totalPersonCount += parseInt(this.data[i].Kinder);
+              }
           }
-
       }
 
   }

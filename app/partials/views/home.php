@@ -1,6 +1,6 @@
 <div class="top-bar">
-    <h1 class="text-center fl">WBA Auswertung</h1>
-    <input autofocus="" class="search bold" type="search" ng-model="search" placeholder="Name / Firma">
+    <h1 class="heading">WBA Auswertung</h1>
+    <input autofocus="" class="search" type="search" ng-model="search" placeholder="Name / Firma">
 </div>
 
 <div class="clear">

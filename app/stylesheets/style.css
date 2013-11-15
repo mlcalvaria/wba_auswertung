@@ -1,11 +1,11 @@
 .search {
   padding: .5rem;
-  display: inline-block;
-  position: absolute;
+  margin: .5rem 0;
+  font-weight: bold;
+  color: #4f4f4f;
   outline: none;
-  right: 0;
   border: none;
-  border-bottom: 2px solid cadetblue;
+  border-bottom: 2px solid #bebebe;
 }
 
 .fl {
@@ -36,4 +36,8 @@
 .rt-input {
   border: none;
   outline: #bebebe;
+}
+
+.heading {
+  font-family: aleo;
 }
