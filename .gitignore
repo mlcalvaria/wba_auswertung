@@ -1,3 +1,6 @@
+app/sys/config/db-cred.inc.php
+server/credentials/creds.js
+
 #################
 ## Eclipse
 #################

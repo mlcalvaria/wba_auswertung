@@ -1,9 +1,20 @@
-//@prepros-append directives/resultTable.js
-//@prepros-append filters/personData.js
-//@prepros-append controllers/WbaCtrl.js
-//@prepros-append services/clients.js
 
-var wba = angular.module('wba', ['ngRoute']);
+
+
+
+
+
+
+
+
+
+
+var wba = angular.module('wba', [
+    'ngRoute',
+    'wba.search',
+    'wba.data-table',
+    'wba.summary'
+]);
 
 /*
  * Der routeProvider
@@ -34,32 +45,12 @@ wba.config(['$routeProvider', function($routeProvider) {
 
 
 
-wba.directive('rt',function(){
-    return{
-        restrict: 'E',
-        templateUrl: "partials/modules/resultTable.html",
-        link: function(scope,element,attrs){
-
-        }
-    }
-});
-wba.filter('persondata',function(){
-    return function(obj,val){
-
-        var filtered = [];
-
-        angular.forEach(obj, function(item) {
-            var re = new RegExp(val, 'i');
-            if(!val || re.test(item.Vorname) || re.test(item.Nachname) || re.test(item.Firma)){
-
-                filtered.push(item) ;
-            }
-
-        });
-        return filtered;
-    };
-});
+var searchModule = angular.module('wba.search',[]);
+var summaryModule = angular.module('wba.summary',[]);
+var tableModule = angular.module('wba.data-table',[]);
 wba.controller('WbaCtrl',function($scope,$http,clients){
+
+    console.dir(clients.data);
 
     $scope.search       = '';
     $scope.allPersons   = clients.totalPersonCount;
@@ -75,6 +66,8 @@ wba.controller('WbaCtrl',function($scope,$http,clients){
 });
 wba.factory('clients',function($http){
 
+    var api = 'http://quac.triangulum.uberspace.de/wba-api/';
+
   return{
 
       data: [],
@@ -85,20 +78,21 @@ wba.factory('clients',function($http){
       totalPersonCount: 0,
 
       getData: function(){
-          return $http.post('sys/core/fetchData.php');
+          return $http.get(api + 'data/13');
       },
 
       update: function(person){
-          return $http.post('sys/core/update.php',{
 
-              'id':             person.Id,
-              'firstname':      person.Vorname,
-              'lastname':       person.Nachname,
-              'caretaker':      person.Betreuer,
-              'participation':  person.Teilnahme,
-              'company':        person.Firma,
-              'partner':        person.Partner,
-              'children':       person.Kinder
+          return $http.post(api + person.id,{
+              data: {
+                  'id':             person.id,
+                  'vorname':      person.vorname,
+                  'nachname':       person.nachname,
+                  'teilnahme':  person.teilnahme,
+                  'firma':        person.firma,
+                  'partner':        person.partner,
+                  'kinder':       person.kinder
+              }
           });
       },
 
@@ -123,4 +117,29 @@ var k = 0;
 
   }
 
+});
+wba.filter('persondata',function(){
+    return function(obj,val){
+
+        var filtered = [];
+
+        angular.forEach(obj, function(item) {
+            var re = new RegExp(val, 'i');
+            if(!val || re.test(item.vorname) || re.test(item.nachname) || re.test(item.firma)){
+
+                filtered.push(item) ;
+            }
+
+        });
+        return filtered;
+    };
+});
+wba.directive('rt',function(){
+    return{
+        restrict: 'E',
+        templateUrl: "partials/modules/resultTable.html",
+        link: function(scope,element,attrs){
+
+        }
+    }
 });

@@ -1,0 +1,1 @@
+var tableModule = angular.module('wba.data-table',[]);
