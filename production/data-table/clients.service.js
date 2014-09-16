@@ -1,6 +1,19 @@
 wba.factory('clients',function($http){
 
-    var api = 'http://quac.triangulum.uberspace.de/wba-api/';
+    var api = 'https://quac.triangulum.uberspace.de/wba-api/';
+
+    function getStatusCount(data,status){
+
+        var count = 0;
+
+        data.forEach(function(item){
+            if(item.teilnahme == status){
+                count++;
+            }
+        });
+
+        return count;
+    }
 
   return{
 
@@ -12,7 +25,13 @@ wba.factory('clients',function($http){
       totalPersonCount: 0,
 
       getData: function(){
-          return $http.get(api + 'data/13');
+
+          var self = this;
+
+          return $http.get(api + 'data/13')
+              .then(function(res){
+                  self.data = res.data;
+              });
       },
 
       update: function(person){
@@ -30,23 +49,32 @@ wba.factory('clients',function($http){
           });
       },
 
-      init: function(data){
+      getPendingCount: function(){
+          return getStatusCount(this.data,'2');
+      },
 
-          this.data = data;
-var k = 0;
-          for (var i = 0;i < this.data.length;i++){
+      getDenialCount: function(){
+          return getStatusCount(this.data, '0');
+      },
 
-              if (this.data[i].Teilnahme == 0){this.denials++;}
-              if (this.data[i].Teilnahme == 1){this.participants++;this.totalPersonCount += 1;}
-              if (this.data[i].Teilnahme == 2){this.pendings++;}
-              if (this.data[i].Partner  != ""){this.totalPersonCount += 1;}
+      getParticipantCount: function(){
+          return getStatusCount(this.data, '1');
+      },
+      getTotalVisitors: function(){
 
+          var total = 0;
 
-              if(this.data[i].Kinder != ""){
+          this.data.forEach(function(item){
 
-                  this.totalPersonCount += parseInt(this.data[i].Kinder);
+              var partner = item.partner ? 1 : 0;
+
+              if(item.teilnahme == '1'){
+                  total += (1 + item.kinder + partner);
               }
-          }
+
+          });
+
+          return total;
       }
 
   }

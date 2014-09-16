@@ -1,13 +1,11 @@
 wba.controller('WbaCtrl',function($scope,$http,clients){
 
-    console.dir(clients.data);
-
     $scope.search       = '';
-    $scope.allPersons   = clients.totalPersonCount;
+    $scope.allPersons   = clients.getTotalVisitors();
     $scope.clients      = clients.data;
-    $scope.participants = clients.participants;
-    $scope.denials      = clients.denials;
-    $scope.pending      = clients.pendings;
+    $scope.participants = clients.getParticipantCount();
+    $scope.denials      = clients.getDenialCount();
+    $scope.pending      = clients.getPendingCount();
 
     $scope.updatePerson = function(person){
         clients.update(person);

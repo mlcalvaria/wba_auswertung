@@ -24,19 +24,10 @@ var wba = angular.module('wba', [
 
 wba.config(['$routeProvider', function($routeProvider) {
     $routeProvider.
-        when('/', {templateUrl: 'partials/views/home.php',   controller: 'WbaCtrl',resolve: {
+        when('/', {templateUrl: 'partials/views/home.html',   controller: 'WbaCtrl',resolve: {
 
             data: function($q,clients){
-                var deffered = $q.defer();
-
-                clients.getData().then(function(promise){
-                    deffered.resolve(promise);
-                });
-
-                deffered.promise.then(function(promise){
-                   clients.init(promise.data);
-                });
-                return deffered.promise;
+                return clients.getData();
             }
 
         }}).

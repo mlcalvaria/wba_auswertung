@@ -14,7 +14,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.all('*',function(req,res,next){
-    //Todo: Authenticate
+
+    //Todo: authentication
     next();
 
 });
@@ -48,59 +49,56 @@ app.get('/data/:year', function(req,res){
 /**
  * Überschreibt den angegebenen Datensatz mit neuem Inhalt
  *
- * @urlaparam id - Die ID des Datensatzes
+ * @urlparam id - Die ID des Datensatzes
  */
 
 app.post('/:id',function(req,res){
 
-    var connection = mysql.createConnection(creds.data);
+    var connection,
+        haspartner,
+        inserts,
+        query,
+        formatedSQL;
 
-    var haspartner;
+    connection = mysql.createConnection(creds.data);
 
-    var query = 'UPDATE `wba_kunden` SET ' +
+    connection.connect();
+
+    query = 'UPDATE `wba_kunden` SET ' +
         'firma = ? ,' +
         'vorname = ? ,' +
         'nachname = ? ,' +
         'teilnahme = ? ,' +
         'partner = ? ,' +
+        'partner_dabei = ? ,' +
         'kinder = ? ' +
         'WHERE id  = ?';
 
-    connection.connect();
 
-    switch(req.body.data.teilnahme[0]){
-        case 50:
-            req.body.data.teilnahme = '2';
-            break;
-        case 49:
-            req.body.data.teilnahme = '1';
-            break;
-        case 48:
-            req.body.data.teilnahme = '0';
-            break;
-    }
+    haspartner = req.body.data.partner ? '1' : '0';
 
-    haspartner = req.body.data.partner ? 1 : 0;
-    req.body.data.partner = req.body.data.partner ? req.body.data.partner : ' ';
-
-    var inserts = [
+    /**
+     * Insert values in the prepared statement
+     *
+     * @see https://www.npmjs.org/package/mysql
+     */
+    inserts = [
         req.body.data.firma,
         req.body.data.vorname,
         req.body.data.nachname,
         req.body.data.teilnahme,
         req.body.data.partner,
+        haspartner,
         req.body.data.kinder,
         parseInt(req.params.id)
     ];
 
-    var formatedSQL = mysql.format(query, inserts);
-
-    console.dir(formatedSQL);
+    formatedSQL = mysql.format(query, inserts);
 
     connection.query(formatedSQL, function(err, rows, fields) {
         if (err) throw err;
 
-        res.send(200).end();
+        res.status(200).end();
     });
 
     connection.end();
