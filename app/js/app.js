@@ -109,6 +109,10 @@ wba.factory('clients',function($http){
 
       update: function(person){
 
+          if(!person.id){
+              throw new Error('Missing ID');
+          }
+
           return $http.post(api + person.id,{
               data: {
                   'id':         person.id,
