@@ -3,6 +3,12 @@
     <input autofocus="" class="search" type="search" ng-model="search" placeholder="Name / Firma">
 </div>
 
+<select ng-model="selectedYear" ng-change="changeSelectedYear()">
+    <option>'12</option>
+    <option>'13</option>
+    <option>'14</option>
+</select>
+
 <div class="clear">
     <p class="infopanel">Anzahl Zusagen: {{participants}}</p>
     <p class="infopanel">Anzahl Absagen: {{denials}}</p>

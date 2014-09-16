@@ -19,6 +19,8 @@ wba.factory('clients',function($http){
 
       data: [],
 
+      selectedYear: '13',
+
       participants: 0,
       denials: 0,
       pendings: 0,
@@ -28,7 +30,7 @@ wba.factory('clients',function($http){
 
           var self = this;
 
-          return $http.get(api + 'data/13')
+          return $http.get(api + 'data/' + self.selectedYear)
               .then(function(res){
                   self.data = res.data;
               });
@@ -38,13 +40,13 @@ wba.factory('clients',function($http){
 
           return $http.post(api + person.id,{
               data: {
-                  'id':             person.id,
-                  'vorname':      person.vorname,
-                  'nachname':       person.nachname,
+                  'id':         person.id,
+                  'vorname':    person.vorname,
+                  'nachname':   person.nachname,
                   'teilnahme':  person.teilnahme,
-                  'firma':        person.firma,
-                  'partner':        person.partner,
-                  'kinder':       person.kinder
+                  'firma':      person.firma,
+                  'partner':    person.partner,
+                  'kinder':     person.kinder
               }
           });
       },
@@ -75,6 +77,9 @@ wba.factory('clients',function($http){
           });
 
           return total;
+      },
+      setYear: function(year){
+          this.selectedYear = year;
       }
 
   }

@@ -30,7 +30,7 @@ app.get('/data/:year', function(req,res){
 
     var connection = mysql.createConnection(creds.data);
 
-    var query = 'SELECT id,firma,ort,vorname,nachname,teilnahme,betreuer,partner,kinder FROM `wba_kunden` WHERE KAKTION  = ?';
+    var query = 'SELECT id,firma,ort,vorname,nachname,teilnahme,betreuer,partner,kinder,email FROM `wba_kunden` WHERE KAKTION  = ?';
 
     connection.connect();
 
@@ -72,6 +72,7 @@ app.post('/:id',function(req,res){
         'partner = ? ,' +
         'partner_dabei = ? ,' +
         'kinder = ? ' +
+        'email = ? ' +
         'WHERE id  = ?';
 
 
@@ -90,7 +91,8 @@ app.post('/:id',function(req,res){
         req.body.data.partner,
         haspartner,
         req.body.data.kinder,
-        parseInt(req.params.id)
+        parseInt(req.params.id),
+        req.body.data.email
     ];
 
     formatedSQL = mysql.format(query, inserts);

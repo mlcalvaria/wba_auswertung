@@ -42,16 +42,32 @@ var tableModule = angular.module('wba.data-table',[]);
 wba.controller('WbaCtrl',function($scope,$http,clients){
 
     $scope.search       = '';
-    $scope.allPersons   = clients.getTotalVisitors();
-    $scope.clients      = clients.data;
-    $scope.participants = clients.getParticipantCount();
-    $scope.denials      = clients.getDenialCount();
-    $scope.pending      = clients.getPendingCount();
+
+    $scope.selectedYear = '\'13';
+
+    loadData();
 
     $scope.updatePerson = function(person){
         clients.update(person);
-    }
+    };
 
+    $scope.changeSelectedYear = function(){
+
+        var year = $scope.selectedYear.substring(1);
+
+        clients.setYear(year);
+
+        clients.getData()
+            .then(loadData);
+    };
+
+    function loadData(){
+        $scope.allPersons   = clients.getTotalVisitors();
+        $scope.clients      = clients.data;
+        $scope.participants = clients.getParticipantCount();
+        $scope.denials      = clients.getDenialCount();
+        $scope.pending      = clients.getPendingCount();
+    }
 });
 wba.factory('clients',function($http){
 
@@ -74,6 +90,8 @@ wba.factory('clients',function($http){
 
       data: [],
 
+      selectedYear: '13',
+
       participants: 0,
       denials: 0,
       pendings: 0,
@@ -83,7 +101,7 @@ wba.factory('clients',function($http){
 
           var self = this;
 
-          return $http.get(api + 'data/13')
+          return $http.get(api + 'data/' + self.selectedYear)
               .then(function(res){
                   self.data = res.data;
               });
@@ -93,13 +111,13 @@ wba.factory('clients',function($http){
 
           return $http.post(api + person.id,{
               data: {
-                  'id':             person.id,
-                  'vorname':      person.vorname,
-                  'nachname':       person.nachname,
+                  'id':         person.id,
+                  'vorname':    person.vorname,
+                  'nachname':   person.nachname,
                   'teilnahme':  person.teilnahme,
-                  'firma':        person.firma,
-                  'partner':        person.partner,
-                  'kinder':       person.kinder
+                  'firma':      person.firma,
+                  'partner':    person.partner,
+                  'kinder':     person.kinder
               }
           });
       },
@@ -130,6 +148,9 @@ wba.factory('clients',function($http){
           });
 
           return total;
+      },
+      setYear: function(year){
+          this.selectedYear = year;
       }
 
   }
@@ -141,13 +162,15 @@ wba.filter('persondata',function(){
         var filtered = [];
 
         angular.forEach(obj, function(item) {
-            var re = new RegExp(val, 'i');
-            if(!val || re.test(item.vorname) || re.test(item.nachname) || re.test(item.firma)){
 
+            var re = new RegExp(val, 'i');
+
+            if(!val || re.test(item.vorname) || re.test(item.nachname) || re.test(item.firma) || re.test(item.email)){
                 filtered.push(item) ;
             }
 
         });
+
         return filtered;
     };
 });

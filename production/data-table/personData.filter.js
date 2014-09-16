@@ -4,13 +4,15 @@ wba.filter('persondata',function(){
         var filtered = [];
 
         angular.forEach(obj, function(item) {
-            var re = new RegExp(val, 'i');
-            if(!val || re.test(item.vorname) || re.test(item.nachname) || re.test(item.firma)){
 
+            var re = new RegExp(val, 'i');
+
+            if(!val || re.test(item.vorname) || re.test(item.nachname) || re.test(item.firma) || re.test(item.email)){
                 filtered.push(item) ;
             }
 
         });
+
         return filtered;
     };
 });

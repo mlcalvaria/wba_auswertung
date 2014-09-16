@@ -41,3 +41,22 @@
 .heading {
   font-family: aleo;
 }
+
+.restrained {
+  color: #cfcfcf;
+}
+
+.participating {
+  background: #9dcfb0;
+}
+
+.denied {
+  background: #cfaa97;
+}
+
+.tablerow:hover {
+  background: #90c0cf;
+}
+.tablerow:hover .rt-input {
+  background: #90c0cf;
+}
