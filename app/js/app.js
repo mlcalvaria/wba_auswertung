@@ -47,8 +47,18 @@ wba.controller('WbaCtrl',function($scope,$http,clients){
 
     loadData();
 
-    $scope.updatePerson = function(person){
-        clients.update(person);
+    $scope.updatePerson = function(person,prop){
+
+        console.dir(person);
+        /**
+         * Todo:
+         * Zur Zeit wird jeder Wert aktualsiert, und zwar bei jedem update (Jedem keydown)
+         * Zwar läuft die Neuberechnung flüssig, dennoch wäre es schön wenn man die Neuzuweißung nur für das Feld durchführt
+         * das betroffen ist
+         */
+
+        clients.update(person)
+            .then(loadData);
     };
 
     $scope.changeSelectedYear = function(){
@@ -59,10 +69,11 @@ wba.controller('WbaCtrl',function($scope,$http,clients){
 
         clients.getData()
             .then(loadData);
+
     };
 
     function loadData(){
-        $scope.allPersons   = clients.getTotalVisitors();
+        $scope.allPersons   = clients.totalVisitors();
         $scope.clients      = clients.data;
         $scope.participants = clients.getParticipantCount();
         $scope.denials      = clients.getDenialCount();
@@ -86,6 +97,7 @@ wba.factory('clients',function($http){
         return count;
     }
 
+
   return{
 
       data: [],
@@ -95,49 +107,7 @@ wba.factory('clients',function($http){
       participants: 0,
       denials: 0,
       pendings: 0,
-      totalPersonCount: 0,
-
-      getData: function(){
-
-          var self = this;
-
-          return $http.get(api + 'data/' + self.selectedYear)
-              .then(function(res){
-                  self.data = res.data;
-              });
-      },
-
-      update: function(person){
-
-          if(!person.id){
-              throw new Error('Missing ID');
-          }
-
-          return $http.post(api + person.id,{
-              data: {
-                  'id':         person.id,
-                  'vorname':    person.vorname,
-                  'nachname':   person.nachname,
-                  'teilnahme':  person.teilnahme,
-                  'firma':      person.firma,
-                  'partner':    person.partner,
-                  'kinder':     person.kinder
-              }
-          });
-      },
-
-      getPendingCount: function(){
-          return getStatusCount(this.data,'2');
-      },
-
-      getDenialCount: function(){
-          return getStatusCount(this.data, '0');
-      },
-
-      getParticipantCount: function(){
-          return getStatusCount(this.data, '1');
-      },
-      getTotalVisitors: function(){
+      totalVisitors: function(){
 
           var total = 0;
 
@@ -153,6 +123,43 @@ wba.factory('clients',function($http){
 
           return total;
       },
+      totalPersonCount: 0,
+
+      getData: function(){
+
+          var self = this;
+
+          return $http.get(api + 'data/' + self.selectedYear)
+              .then(function(res){
+                  self.data = res.data;
+              });
+      },
+
+      update: function(person){
+
+          var self = this;
+
+          if(!person.id){
+              throw new Error('Missing ID');
+          }
+
+          return $http.post(api + person.id,{
+              data: person
+          });
+      },
+
+      getPendingCount: function(){
+          return getStatusCount(this.data,'2');
+      },
+
+      getDenialCount: function(){
+          return getStatusCount(this.data, '0');
+      },
+
+      getParticipantCount: function(){
+          return getStatusCount(this.data, '1');
+      },
+
       setYear: function(year){
           this.selectedYear = year;
       }

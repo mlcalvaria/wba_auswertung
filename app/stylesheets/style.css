@@ -38,6 +38,10 @@
   outline: #bebebe;
 }
 
+.tc {
+  text-align: center;
+}
+
 .heading {
   font-family: aleo;
 }

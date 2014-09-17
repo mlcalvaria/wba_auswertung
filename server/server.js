@@ -71,7 +71,7 @@ app.post('/:id',function(req,res){
         'teilnahme = ? ,' +
         'partner = ? ,' +
         'partner_dabei = ? ,' +
-        'kinder = ? ' +
+        'kinder = ? ,' +
         'email = ? ' +
         'WHERE id  = ?';
 
@@ -91,8 +91,8 @@ app.post('/:id',function(req,res){
         req.body.data.partner,
         haspartner,
         req.body.data.kinder,
+        req.body.data.email,
         parseInt(req.params.id),
-        req.body.data.email
     ];
 
     formatedSQL = mysql.format(query, inserts);

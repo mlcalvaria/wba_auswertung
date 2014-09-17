@@ -6,8 +6,18 @@ wba.controller('WbaCtrl',function($scope,$http,clients){
 
     loadData();
 
-    $scope.updatePerson = function(person){
-        clients.update(person);
+    $scope.updatePerson = function(person,prop){
+
+        console.dir(person);
+        /**
+         * Todo:
+         * Zur Zeit wird jeder Wert aktualsiert, und zwar bei jedem update (Jedem keydown)
+         * Zwar läuft die Neuberechnung flüssig, dennoch wäre es schön wenn man die Neuzuweißung nur für das Feld durchführt
+         * das betroffen ist
+         */
+
+        clients.update(person)
+            .then(loadData);
     };
 
     $scope.changeSelectedYear = function(){
@@ -18,10 +28,11 @@ wba.controller('WbaCtrl',function($scope,$http,clients){
 
         clients.getData()
             .then(loadData);
+
     };
 
     function loadData(){
-        $scope.allPersons   = clients.getTotalVisitors();
+        $scope.allPersons   = clients.totalVisitors();
         $scope.clients      = clients.data;
         $scope.participants = clients.getParticipantCount();
         $scope.denials      = clients.getDenialCount();

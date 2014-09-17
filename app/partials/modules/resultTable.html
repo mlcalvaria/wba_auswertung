@@ -1,14 +1,14 @@
 <table class="table" ng-show="search.length > 1">
     <thead>
     <tr>
-        <th>Vorname</th>
-        <th>Nachname</th>
-        <th>Betreuer</th>
-        <th>Partner</th>
-        <th>Kinder</th>
-        <th>Teilnahme</th>
-        <th>Firma</th>
-        <th>Email</th>
+        <th class="tc">Vorname</th>
+        <th class="tc">Nachname</th>
+        <th class="tc">Betreuer</th>
+        <th class="tc">Partner</th>
+        <th class="tc">Kinder</th>
+        <th class="tc">Teilnahme</th>
+        <th class="tc">Firma</th>
+        <th class="tc">Email</th>
     </tr>
     </thead>
     <tbody>
@@ -17,8 +17,8 @@
         <td><input class="rt-input" type="text" ng-model="person.nachname" ng-change="updatePerson(person)"></td>
         <td><input class="rt-input" type="text" ng-model="person.betreuer" ng-change="updatePerson(person)"></td>
         <td><input class="rt-input" type="text" ng-model="person.partner" ng-change="updatePerson(person)"></td>
-        <td><input class="rt-input" type="text" ng-model="person.kinder" ng-class="{'restrained': !person.kinder}" ng-change="updatePerson(person)"></td>
-        <td><input class="rt-input" type="text" ng-model="person.teilnahme" ng-class="{'participating': person.teilnahme == '1', 'denied': person.teilnahme == '0'}"  ng-change="updatePerson(person)"></td>
+        <td><input class="rt-input tc" type="text" ng-model="person.kinder" ng-class="{'restrained': !person.kinder}" ng-change="updatePerson(person)"></td>
+        <td><input class="rt-input tc" type="text" ng-model="person.teilnahme" ng-class="{'participating': person.teilnahme == '1', 'denied': person.teilnahme == '0'}"  ng-change="updatePerson(person)"></td>
         <td><input class="rt-input" type="text" ng-model="person.firma" ng-change="updatePerson(person)"></td>
         <td><input class="rt-input" type="text" ng-model="person.email" ng-change="updatePerson(person)"></td>
     </tr>

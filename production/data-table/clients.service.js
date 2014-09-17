@@ -15,6 +15,7 @@ wba.factory('clients',function($http){
         return count;
     }
 
+
   return{
 
       data: [],
@@ -24,49 +25,7 @@ wba.factory('clients',function($http){
       participants: 0,
       denials: 0,
       pendings: 0,
-      totalPersonCount: 0,
-
-      getData: function(){
-
-          var self = this;
-
-          return $http.get(api + 'data/' + self.selectedYear)
-              .then(function(res){
-                  self.data = res.data;
-              });
-      },
-
-      update: function(person){
-
-          if(!person.id){
-              throw new Error('Missing ID');
-          }
-
-          return $http.post(api + person.id,{
-              data: {
-                  'id':         person.id,
-                  'vorname':    person.vorname,
-                  'nachname':   person.nachname,
-                  'teilnahme':  person.teilnahme,
-                  'firma':      person.firma,
-                  'partner':    person.partner,
-                  'kinder':     person.kinder
-              }
-          });
-      },
-
-      getPendingCount: function(){
-          return getStatusCount(this.data,'2');
-      },
-
-      getDenialCount: function(){
-          return getStatusCount(this.data, '0');
-      },
-
-      getParticipantCount: function(){
-          return getStatusCount(this.data, '1');
-      },
-      getTotalVisitors: function(){
+      totalVisitors: function(){
 
           var total = 0;
 
@@ -82,6 +41,43 @@ wba.factory('clients',function($http){
 
           return total;
       },
+      totalPersonCount: 0,
+
+      getData: function(){
+
+          var self = this;
+
+          return $http.get(api + 'data/' + self.selectedYear)
+              .then(function(res){
+                  self.data = res.data;
+              });
+      },
+
+      update: function(person){
+
+          var self = this;
+
+          if(!person.id){
+              throw new Error('Missing ID');
+          }
+
+          return $http.post(api + person.id,{
+              data: person
+          });
+      },
+
+      getPendingCount: function(){
+          return getStatusCount(this.data,'2');
+      },
+
+      getDenialCount: function(){
+          return getStatusCount(this.data, '0');
+      },
+
+      getParticipantCount: function(){
+          return getStatusCount(this.data, '1');
+      },
+
       setYear: function(year){
           this.selectedYear = year;
       }
